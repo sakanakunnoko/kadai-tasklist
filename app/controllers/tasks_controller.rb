@@ -4,7 +4,7 @@ class TasksController < ApplicationController
  end
 
  def show#レコード一つ表示
-  @task = Task.find(params[:id])
+  set_message
  end
 
  def new#新規作成ページ
@@ -12,7 +12,7 @@ class TasksController < ApplicationController
  end
 
  def create#newを処理する
-   @task = Task.new(task_params)
+  set_message
 
     if @task.save
       flash[:success] = 'タスクが正常に投稿されました'
@@ -24,11 +24,11 @@ class TasksController < ApplicationController
  end
 
  def edit
-    @task = Task.find(params[:id])
+    set_message
  end
 
  def update
-   @task = Task.find(params[:id])
+  set_message
 
     if @task.update(task_params)
       flash[:success] = 'タスクは正常に更新されました'
@@ -40,7 +40,7 @@ class TasksController < ApplicationController
  end
 
  def destroy
-   @task = Task.find(params[:id])
+   set_message
    @task.destroy
 
    flash[:success] = 'タスクは正常に削除されました'
@@ -52,4 +52,9 @@ class TasksController < ApplicationController
  def task_params
     params.require(:task).permit(:content)
  end
+ 
+ def set_task
+   @message = Message.find(params[:id])
+ end
+
 end
