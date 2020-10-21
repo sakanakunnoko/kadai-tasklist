@@ -1,18 +1,18 @@
 class TasksController < ApplicationController
  def index#レコードの一覧表示
-   @tasks = Task.all
+   @task = Task.all
  end
 
  def show#レコード一つ表示
- 　@tasks = Task.find(params[:id])
+  @task = Task.find(params[:id])
  end
 
  def new#新規作成ページ
-   @tasks = Task.new
+   @task = Task.new
  end
 
  def create#newを処理する
-   @tasks = Task.new(task_params)
+   @task = Task.new(task_params)
 
     if @task.save
       flash[:success] = 'タスクが正常に投稿されました'
@@ -52,3 +52,4 @@ class TasksController < ApplicationController
  def task_params
     params.require(:task).permit(:content)
  end
+end
