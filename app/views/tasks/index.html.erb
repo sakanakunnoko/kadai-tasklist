@@ -1,9 +1,22 @@
+<% if logged_in? %>
 <h1>タスク一覧</h1>
-
-<ul>
-  <% @task.each do |task| %>
-    <li><%= link_to task.id, task %> : <%=task.status %> &gt; <%= task.content %></li>
+<ul class="list-unstyled">
+  <% @tasks.each do |tasklist| %>
+    <li class="media mb-3">
+      <div class="media-body">
+        <div>
+          <%= link_to tasklist.user.name, users_path(tasklist.user) %> <span class="text-muted">posted at <%= tasklist.created_at %></span>
+        </div>
+        <div>
+          <p><%= tasklist.content %></p>
+        </div>
+      </div>
+    </li>
   <% end %>
+  <%= paginate @tasks %>
 </ul>
-
 <%= link_to '新規タスクの投稿', new_task_path %>
+<%= link_to 'Logout', logout_path, method: :delete %>
+<% else %>
+redirect_to login_url
+<% end %>
