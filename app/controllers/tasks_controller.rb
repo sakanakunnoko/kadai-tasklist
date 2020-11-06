@@ -1,21 +1,20 @@
 class TasksController < ApplicationController
   before_action :require_user_logged_in
-  before_action :correct_user, only: [:destroy]
- def index#レコードの一覧表示
-    if logged_in?
-      @tasks = current_user.tasks.order(id: :desc).page(params[:page])
-    end
+  before_action :correct_user #,only: [:destroy]
+ #レコードの一覧表示
+ def index
+   @tasks = current_user.tasks.order(id: :desc).page(params[:page])
  end
-
- def show#レコード一つ表示
+ #レコード一つ表示
+ def show
    @task = current_user.tasks.find_by(id: params[:id])
  end
-
- def new#新規作成ページ
+ #新規作成ページ
+ def new
    @task = current_user.tasks.build
  end
-
- def create#newを処理する
+ #newを処理する
+ def create
   @task = current_user.tasks.build(task_params)
     if @task.save
       flash[:success] = 'タスクが正常に投稿されました'

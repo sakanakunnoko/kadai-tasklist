@@ -1,4 +1,4 @@
-<% if logged_in? %>
+<%#<% if logged_in? %>
 <h1>タスク一覧</h1>
 <ul class="list-unstyled">
   <% @tasks.each do |tasklist| %>
@@ -17,6 +17,6 @@
 </ul>
 <%= link_to '新規タスクの投稿', new_task_path %>
 <%= link_to 'Logout', logout_path, method: :delete %>
-<% else %>
-redirect_to login_url
-<% end %>
+<%#<% else %>
+<%#redirect_to login_url
+<%#<% end %>
