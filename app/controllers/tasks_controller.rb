@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :require_user_logged_in
-  before_action :correct_user #,only: [:destroy]
+  before_action :correct_user ,only: [:destroy]
  #レコードの一覧表示
  def index
    @tasks = current_user.tasks.order(id: :desc).page(params[:page])
