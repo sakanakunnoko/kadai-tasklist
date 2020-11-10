@@ -1,9 +1,9 @@
 class TasksController < ApplicationController
   before_action :require_user_logged_in
-  before_action :correct_user ,only: [:destroy]
+  before_action :correct_user ,only: [:destroy,:show,:update,:create]
  #レコードの一覧表示
  def index
-   @tasks = current_user.tasks.order(id: :desc).page(params[:page])
+   @task = current_user.tasks.order(id: :desc).page(params[:page])
  end
  #レコード一つ表示
  def show
@@ -54,7 +54,7 @@ class TasksController < ApplicationController
  end
  
  def correct_user
-    @task = current_user.tasks.find_by(id: params[:id])
+   @task = current_user.tasks.find_by(id: params[:id])
     unless @task
       redirect_to root_url
     end
